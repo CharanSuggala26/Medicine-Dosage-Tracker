@@ -7,8 +7,7 @@ function Footer() {
               <h3 className="text-lg font-semibold mb-4">About Us</h3>
               <p className="text-gray-300">
               At Pill-Planner, we are dedicated to helping you manage your medication schedule with ease 
-              and accuracy. Our platform provides a user-friendly interface for scheduling medications, tracking doses, 
-              and ensuring compliance. We prioritize your privacy and accuracy. Our goal is to empower you to take control
+              and accuracy. We prioritize your privacy and accuracy. Our goal is to empower you to take control
              of your health by providing medication tracking, appointment booking, and prescription analysis.
               </p>
             </div>

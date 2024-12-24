@@ -38,6 +38,9 @@ function Navbar({ toggleSidebar }) {
               <Link to="/contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
                 Contact
               </Link>
+              <Link to="/store" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
+                Store
+              </Link>
             </div>
           </div>
 
@@ -67,6 +70,9 @@ function Navbar({ toggleSidebar }) {
               </Link>
               <Link to="/contact" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md">
                 Contact
+              </Link>
+              <Link to="/store" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md">
+                Store
               </Link>
             </div>
           </div>

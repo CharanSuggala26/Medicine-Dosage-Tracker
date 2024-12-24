@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaCog, FaEnvelope } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaCog, FaEnvelope, FaShoppingBasket, FaShoppingCart } from 'react-icons/fa';
 
 function Sidebar({ isOpen }) {
   return (
@@ -44,6 +44,15 @@ function Sidebar({ isOpen }) {
             >
               <FaEnvelope className="h-5 w-5" />
               <span>Contact</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/store"
+              className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-700"
+            >
+              <FaShoppingCart className="h-5 w-5" />
+              <span>Store</span>
             </Link>
           </li>
         </ul>

@@ -4,6 +4,8 @@ import Navbar from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
 import Footer from './Components/Footer';
 import Home from './Pages/Home';
+import Store from './Pages/Store';
+import About from './Pages/About';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -21,12 +23,12 @@ function App() {
         <main className="flex-grow pt-16">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<div className="p-4">About Page</div>} />
+            <Route path="/about" element={<About />} />
             <Route path="/services" element={<div className="p-4">Services Page</div>} />
             <Route path="/contact" element={<div className="p-4">Contact Page</div>} />
+            <Route path="/store" element={<Store />} />
           </Routes>
         </main>
-
         <Footer />
       </div>
     </Router>
