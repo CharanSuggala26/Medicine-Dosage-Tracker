@@ -7,6 +7,7 @@ import Home from './Pages/Home';
 import Store from './Pages/Store';
 import About from './Pages/About';
 import Shceduling from './Pages/Shceduling';
+import Login from './Pages/Login';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,6 +30,7 @@ function App() {
             <Route path="/contact" element={<div className="p-4">Contact Page</div>} />
             <Route path="/store" element={<Store />} />
             <Route path="/shceduling" element={<Shceduling />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
         <Footer />
