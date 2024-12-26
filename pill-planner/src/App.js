@@ -6,6 +6,7 @@ import Footer from './Components/Footer';
 import Home from './Pages/Home';
 import Store from './Pages/Store';
 import About from './Pages/About';
+import Shceduling from './Pages/Shceduling';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,6 +28,7 @@ function App() {
             <Route path="/services" element={<div className="p-4">Services Page</div>} />
             <Route path="/contact" element={<div className="p-4">Contact Page</div>} />
             <Route path="/store" element={<Store />} />
+            <Route path="/shceduling" element={<Shceduling />} />
           </Routes>
         </main>
         <Footer />
