@@ -12,14 +12,16 @@ function Home() {
             Your health is in your hands, Let us help you keep it there
           </p>
         </div>
-
+       
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Link to="/appointment">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Book Appointment</h2>
             <p className="text-gray-600">
               Book appointments with healthcare providers directly through the platform for convenient medical consultations.
             </p>
           </div>
+          </Link>
           <Link to="/shceduling">
             <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer">
               <h2 className="text-xl font-semibold mb-4">Medicine Scheduling</h2>

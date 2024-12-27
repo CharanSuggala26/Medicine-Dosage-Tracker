@@ -8,6 +8,8 @@ import Store from './Pages/Store';
 import About from './Pages/About';
 import Shceduling from './Pages/Shceduling';
 import Login from './Pages/Login';
+import Appointment from './Pages/Appointment';
+import Contact from './Pages/Contact';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,10 +29,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<div className="p-4">Services Page</div>} />
-            <Route path="/contact" element={<div className="p-4">Contact Page</div>} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/store" element={<Store />} />
             <Route path="/shceduling" element={<Shceduling />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/appointment" element={<Appointment />} />
           </Routes>
         </main>
         <Footer />

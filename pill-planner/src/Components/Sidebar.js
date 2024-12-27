@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaCog, FaEnvelope, FaShoppingBasket, FaShoppingCart, FaCalendar } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaCog, FaEnvelope, FaShoppingBasket, FaShoppingCart, FaCalendar, FaCashRegister } from 'react-icons/fa';
 
 function Sidebar({ isOpen }) {
   return (
@@ -39,11 +39,11 @@ function Sidebar({ isOpen }) {
           </li>
           <li>
             <Link
-              to="/contact"
+              to="/appointment"
               className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-700"
             >
-              <FaEnvelope className="h-5 w-5" />
-              <span>Contact</span>
+              <FaCashRegister className="h-5 w-5" />
+              <span>Book Appointment</span>
             </Link>
           </li>
           <li>
