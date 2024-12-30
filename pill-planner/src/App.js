@@ -10,6 +10,7 @@ import Shceduling from './Pages/Shceduling';
 import Login from './Pages/Login';
 import Appointment from './Pages/Appointment';
 import Contact from './Pages/Contact';
+import Signup from './Pages/Signup';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/shceduling" element={<Shceduling />} />
             <Route path="/login" element={<Login />} />
             <Route path="/appointment" element={<Appointment />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
         <Footer />
