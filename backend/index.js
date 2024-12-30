@@ -2,6 +2,7 @@ require("dotenv").config();
 const exp = require("express");
 const cors = require("cors");
 const doctorsApp = require("./APIs/DoctorsData");
+const storeApp = require("./APIs/StoreData");
 const client = require("mongodb").MongoClient;
 const app = exp();
 const port = process.env.PORT || 3500;
@@ -14,6 +15,8 @@ client
     const dbObj = client.db("medicineDB");
     const doctorsCollection = dbObj.collection("doctors");
     app.set("doctorsCollection", doctorsCollection);
+    const medicinesCollection = dbObj.collection("medicines");
+    app.set("medicinesCollection", medicinesCollection);
     console.log("DB Connected Successfully.");
   })
   .catch((error) => {
@@ -25,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/doctors", doctorsApp);
+app.use("/store", storeApp);
 
 app.listen(port, () => {
   console.log(`Server running on ${port}.`);

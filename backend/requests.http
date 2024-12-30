@@ -1,2 +1,5 @@
 ### GET doctors data
 GET http://localhost:4700/doctors/
+
+### GET products data
+GET http://localhost:4700/store
