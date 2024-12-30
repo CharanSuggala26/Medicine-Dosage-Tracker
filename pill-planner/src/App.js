@@ -11,6 +11,9 @@ import Login from './Pages/Login';
 import Appointment from './Pages/Appointment';
 import Contact from './Pages/Contact';
 import Signup from './Pages/Signup';
+import AdminPortal from './Pages/AdminPortal';
+import AdminDoctor from './Pages/AdminDoctor';
+import AdminMedicines from './Pages/AdminMedicines';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,13 +32,15 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services" element={<div className="p-4">Services Page</div>} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/store" element={<Store />} />
             <Route path="/shceduling" element={<Shceduling />} />
             <Route path="/login" element={<Login />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/services" element={<AdminPortal />} />
+            <Route path="/doctor" element={<AdminDoctor />} />
+            <Route path="/medicines" element={<AdminMedicines />} />
           </Routes>
         </main>
         <Footer />
