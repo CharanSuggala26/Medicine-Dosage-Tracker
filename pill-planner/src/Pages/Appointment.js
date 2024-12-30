@@ -1,61 +1,66 @@
-import React, { useState, useMemo } from 'react';
-import { Stethoscope } from 'lucide-react';
-import DoctorCard from '../Components/DoctorCard';
-import AppointmentForm from '../Components/AppointmentForm';
-import FilterBar from '../Components/FilterBar';
-import MyAppointments from '../Components/MyAppointments';
+import React, { useState, useMemo } from "react";
+import { Stethoscope } from "lucide-react";
+import DoctorCard from "../Components/DoctorCard";
+import AppointmentForm from "../Components/AppointmentForm";
+import FilterBar from "../Components/FilterBar";
+import MyAppointments from "../Components/MyAppointments";
 
-// Mock data - This would come from MongoDB in a real application
 const doctors = [
   {
-    id: '1',
-    name: 'Dr. Sarah Johnson',
-    specialty: 'Cardiologist',
+    id: "1",
+    name: "Dr. Sarah Johnson",
+    specialty: "Cardiologist",
     experience: 12,
-    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300&h=300',
-    availability: ['Monday', 'Wednesday', 'Friday']
+    image:
+      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300&h=300",
+    availability: ["Monday", "Wednesday", "Friday"],
   },
   {
-    id: '2',
-    name: 'Dr. Michael Chen',
-    specialty: 'Pediatrician',
+    id: "2",
+    name: "Dr. Michael Chen",
+    specialty: "Pediatrician",
     experience: 8,
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300&h=300',
-    availability: ['Tuesday', 'Thursday', 'Saturday']
+    image:
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300&h=300",
+    availability: ["Tuesday", "Thursday", "Saturday"],
   },
   {
-    id: '3',
-    name: 'Dr. Emily Williams',
-    specialty: 'Dermatologist',
+    id: "3",
+    name: "Dr. Emily Williams",
+    specialty: "Dermatologist",
     experience: 15,
-    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=300&h=300',
-    availability: ['Monday', 'Tuesday', 'Thursday']
-  }
+    image:
+      "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=300&h=300",
+    availability: ["Monday", "Tuesday", "Thursday"],
+  },
 ];
 
 function App() {
   const [selectedDoctorId, setSelectedDoctorId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [specialtyFilter, setSpecialtyFilter] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [specialtyFilter, setSpecialtyFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [appointments, setAppointments] = useState([]);
   const [showAppointments, setShowAppointments] = useState(false);
 
   const filteredDoctors = useMemo(() => {
     return doctors.filter((doctor) => {
-      const matchesSpecialty = specialtyFilter ? doctor.specialty === specialtyFilter : true;
-      const matchesSearch = doctor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            doctor.specialty.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSpecialty = specialtyFilter
+        ? doctor.specialty === specialtyFilter
+        : true;
+      const matchesSearch =
+        doctor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doctor.specialty.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesSpecialty && matchesSearch;
     });
   }, [specialtyFilter, searchQuery]);
 
   const handleAppointmentSubmit = (data) => {
-    const doctor = doctors.find(d => d.id === data.doctorId);
+    const doctor = doctors.find((d) => d.id === data.doctorId);
     const appointment = {
       ...data,
       doctorName: doctor.name,
-      specialty: doctor.specialty
+      specialty: doctor.specialty,
     };
     setAppointments((prev) => [...prev, appointment]);
     setSelectedDoctorId(null);
@@ -88,7 +93,8 @@ function App() {
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Our Doctors</h2>
           <p className="mt-2 text-gray-600">
-            Choose from our experienced medical professionals and book your appointment today
+            Choose from our experienced medical professionals and book your
+            appointment today
           </p>
         </div>
 
@@ -135,11 +141,6 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
 
 // import React, { useState, useMemo } from 'react';
 // import { Stethoscope } from 'lucide-react';
