@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaCalendarCheck, FaPills, FaFilePrescription } from "react-icons/fa";
+import { FaCalendarCheck, FaPills, FaFilePrescription, FaUserFriends } from "react-icons/fa";
 
 function AdminPortal() {
   return (
@@ -50,8 +50,7 @@ function AdminPortal() {
               <FaCalendarCheck className="text-blue-500 text-3xl mb-4" />
               <h2 className="text-2xl font-semibold mb-4">Manage Doctors</h2>
               <p className="text-gray-600">
-                Book appointments with healthcare providers directly through the
-                platform for convenient medical consultations.
+                You Can Add,Delete,Edit the data.
               </p>
             </Link>
           </motion.div>
@@ -68,8 +67,7 @@ function AdminPortal() {
                 Manage Medicine
               </h2>
               <p className="text-gray-600">
-                Easily schedule and track your medication doses to ensure timely
-                and consistent treatment.
+              You Can Add,Delete,Edit the data.
               </p>
             </Link>
           </motion.div>
@@ -81,13 +79,12 @@ function AdminPortal() {
             className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             <Link to="/prescription-analysis">
-              <FaFilePrescription className="text-blue-500 text-3xl mb-4" />
+              <FaUserFriends className="text-blue-500 text-3xl mb-4" />
               <h2 className="text-2xl font-semibold mb-4">
-                Prescription Analysis
+                Manage users
               </h2>
               <p className="text-gray-600">
-                Gain insights into your medication usage patterns and identify
-                areas for improvement.
+              You Can Add,Delete,Edit the data.
               </p>
             </Link>
           </motion.div>

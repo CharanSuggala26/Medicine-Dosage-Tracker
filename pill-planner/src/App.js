@@ -14,6 +14,7 @@ import Signup from './Pages/Signup';
 import AdminPortal from './Pages/AdminPortal';
 import AdminDoctor from './Pages/AdminDoctor';
 import AdminMedicines from './Pages/AdminMedicines';
+import Profile from './Pages/Profile';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -41,6 +42,7 @@ function App() {
             <Route path="/services" element={<AdminPortal />} />
             <Route path="/doctor" element={<AdminDoctor />} />
             <Route path="/medicines" element={<AdminMedicines />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
         <Footer />
