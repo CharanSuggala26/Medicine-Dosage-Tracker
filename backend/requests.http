@@ -27,3 +27,30 @@ Content-Type: application/json
     "name": "Test",
     "password": "pass"
 }
+
+### GET Appointments
+GET http://localhost:4700/appointments/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGJiNTdjNWU5NWY5Y2QxM2YxMWQ1NiIsIm5hbWUiOiJUZXN0IiwiaWF0IjoxNzM3MjExNzE2fQ.OKh1judfQ0AR0g3CWTM3FS2ndfnP2dttX2dTSE1liXE
+Content-Type: application/json
+
+{
+    "name": "Test"
+}
+
+
+### POST Appointment addition
+POST http://localhost:4700/appointments/add
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGJiNTdjNWU5NWY5Y2QxM2YxMWQ1NiIsIm5hbWUiOiJUZXN0IiwiaWF0IjoxNzM3MjExNzE2fQ.OKh1judfQ0AR0g3CWTM3FS2ndfnP2dttX2dTSE1liXE
+Content-Type: application/json
+
+{
+  "date": "2025-01-18",
+  "doctorId": "1",
+  "doctorName": "Dr. Sarah Johnson",
+  "email": "family.yerram@gmail.com",
+  "name": "Test",
+  "phone": "9120",
+  "specialty": "Cardiologist",
+  "symptoms": "Fever",
+  "time": "11:00"
+}

@@ -52,6 +52,9 @@ function App() {
       doctorName: doctor.name,
       specialty: doctor.specialty,
     };
+
+    console.log(appointment);
+
     setAppointments((prev) => [...prev, appointment]);
     setSelectedDoctorId(null);
     setShowSuccess(true);

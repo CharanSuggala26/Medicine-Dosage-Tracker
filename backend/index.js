@@ -4,6 +4,7 @@ const cors = require("cors");
 const doctorsApp = require("./APIs/DoctorsData.js");
 const storeApp = require("./APIs/StoreData.js");
 const userApp = require("./APIs/usersApp.js");
+const appointmentsApp = require("./APIs/appointmentsApp.js");
 const client = require("mongodb").MongoClient;
 const app = exp();
 const port = process.env.PORT || 3500;
@@ -20,6 +21,8 @@ client
     app.set("medicinesCollection", medicinesCollection);
     const usersCollection = dbObj.collection("users");
     app.set("usersCollection", usersCollection);
+    const appointmentsCollection = dbObj.collection("appointments");
+    app.set("appointmentsCollection", appointmentsCollection);
     console.log("DB Connected Successfully.");
   })
   .catch((error) => {
@@ -33,6 +36,7 @@ app.get("/", (req, res) => {
 app.use("/doctors", doctorsApp);
 app.use("/store", storeApp);
 app.use("/users", userApp);
+app.use("/appointments", appointmentsApp);
 
 app.listen(port, () => {
   console.log(`Server running on ${port}.`);
