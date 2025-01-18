@@ -3,8 +3,6 @@ const expAsyncHandler = require("express-async-handler");
 const appointmentsApp = exp.Router();
 const verifyToken = require("../Middleware/authenticate");
 
-appointmentsApp.use(verifyToken);
-
 const getAllAppointments = expAsyncHandler(async (req, res) => {
   const usersCollection = req.app.get("usersCollection");
 
@@ -12,7 +10,7 @@ const getAllAppointments = expAsyncHandler(async (req, res) => {
   const user = await usersCollection.findOne({ name: dbUser });
   if (user) {
     const appointmentsArr = user.appointments;
-    res.send({ appointmentsArr });
+    res.send({ payload: appointmentsArr });
   } else {
     res.send({ status: 400, message: "Invalid Username" });
   }
@@ -36,10 +34,10 @@ const addNewAppointment = expAsyncHandler(async (req, res) => {
     });
   }
 
-  return res.send({ status: 500, message: "Internal Server Error." });
+  return res.send({ status: 501, message: "Internal Server Error." });
 });
 
-appointmentsApp.get("/", getAllAppointments);
-appointmentsApp.post("/add", addNewAppointment);
+appointmentsApp.get("/", verifyToken, getAllAppointments);
+appointmentsApp.post("/add", verifyToken, addNewAppointment);
 
 module.exports = appointmentsApp;
