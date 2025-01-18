@@ -1,33 +1,37 @@
-// import LoginForm from '../Components/LoginForm';
-
-// function App() {
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
-//       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6')] bg-cover bg-center opacity-20"></div>
-//       <LoginForm />
-//     </div>
-//   );
-// }
-
-// export default App
-
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [uname, setUname] = useState("");
+  const [passw, setPassw] = useState("");
 
-  const handleSubmit = (e) => {
+  let nav = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login:", { email, password });
+
+    console.log(uname, passw);
+
+    const response = await axios.post("http://localhost:4700/users/login", {
+      name: uname,
+      password: passw,
+    });
+
+    console.log(response);
+
+    const username = response.data.dbUsername;
+    const token = response.data.token;
+
+    window.localStorage.setItem("token", token);
+    window.localStorage.setItem("user", username);
+
+    alert("You are now logged in successfully!");
+    nav("/");
   };
 
   const handleGoogleLogin = () => {
-    // Handle Google login logic here
     console.log("Google login clicked");
   };
 
@@ -55,16 +59,16 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
-              htmlFor="email"
+              htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Username
             </label>
             <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="username"
+              type="text"
+              value={uname}
+              onChange={(e) => setUname(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               required
             />
@@ -80,8 +84,8 @@ const Login = () => {
             <input
               id="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={passw}
+              onChange={(e) => setPassw(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               required
             />

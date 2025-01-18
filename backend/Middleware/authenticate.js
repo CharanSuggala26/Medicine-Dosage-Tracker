@@ -9,6 +9,7 @@ const verifyToken = (req, res, next) => {
       if (err) {
         res.send({ status: 403, message: "Unauthorized Access!" });
       } else {
+        console.log(req);
         console.log(decoded);
         next();
       }

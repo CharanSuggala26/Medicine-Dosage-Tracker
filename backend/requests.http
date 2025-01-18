@@ -3,3 +3,27 @@ GET http://localhost:4700/doctors/
 
 ### GET products data
 GET http://localhost:4700/store
+
+
+### POST Register a user
+POST http://localhost:4700/users/register
+Content-Type: application/json
+
+{
+    "name": "Test",
+    "password": "pass",
+    "phone": "8888888888",
+    "email": "test@email.com",
+    "age": 20,
+    "gender": "Male"
+}
+
+
+### POST Login a user
+POST http://localhost:4700/users/login
+Content-Type: application/json
+
+{
+    "name": "Test",
+    "password": "pass"
+}
