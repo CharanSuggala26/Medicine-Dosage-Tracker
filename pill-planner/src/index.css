@@ -8,3 +8,33 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Calendar Heatmap Styles */
+.react-calendar-heatmap text {
+  font-size: 10px;
+  fill: #aaa;
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #eeeeee;
+}
+
+.react-calendar-heatmap .color-scale-0 {
+  fill: #ebedf0;
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: #9be9a8;
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #40c463;
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #30a14e;
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #216e39;
+}

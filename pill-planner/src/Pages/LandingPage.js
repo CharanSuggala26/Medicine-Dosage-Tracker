@@ -107,7 +107,7 @@ function LandingPage() {
                 <CountUp
                   start={0}
                   end={stat.number}
-                  duration={2}
+                  duration={5}
                   separator=","
                   suffix={stat.suffix}
                 />

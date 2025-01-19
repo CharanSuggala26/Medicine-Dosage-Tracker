@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaCog, FaEnvelope, FaShoppingBasket, FaShoppingCart, FaCalendar, FaCashRegister } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaCog, FaEnvelope, FaShoppingBasket, FaShoppingCart, FaCalendar, FaCashRegister, FaStarAndCrescent, FaStarHalfAlt, FaStopwatch } from 'react-icons/fa';
 
 function Sidebar({ isOpen }) {
   return (
@@ -55,6 +55,15 @@ function Sidebar({ isOpen }) {
               <span>Store</span>
             </Link>
           </li>
+          <li>
+            <Link
+              to="/stats"
+              className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-700"
+            >
+              <FaStopwatch className="h-5 w-5" />
+              <span>Stats dashboard</span>
+            </Link>
+          </li>          
         </ul>
       </div>
     </div>

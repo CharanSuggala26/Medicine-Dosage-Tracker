@@ -39,6 +39,9 @@ function Navbar({ toggleSidebar }) {
               <Link to="/contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
                 Contact
               </Link>
+              <Link to="/login" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
+                Login
+              </Link>
             </div>
             {/* Profile Icon */}
             <button

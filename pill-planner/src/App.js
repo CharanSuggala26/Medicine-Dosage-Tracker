@@ -16,6 +16,7 @@ import AdminDoctor from './Pages/AdminDoctor';
 import AdminMedicines from './Pages/AdminMedicines';
 import Profile from './Pages/Profile';
 import LandingPage from './Pages/LandingPage';
+import Stats from './Pages/Stats';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -45,6 +46,7 @@ function App() {
             <Route path="/medicines" element={<AdminMedicines />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/stats" element={<Stats />} />
           </Routes>
         </main>
         <Footer />
