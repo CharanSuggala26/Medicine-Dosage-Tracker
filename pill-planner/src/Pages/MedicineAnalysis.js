@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { createWorker } from 'tesseract.js';
-import { FileText, Upload, Loader2 } from 'lucide-react';
+import React, { useState } from "react";
+import { createWorker } from "tesseract.js";
+import { FileText, Upload, Loader2 } from "lucide-react";
 
 function MedicineAnalysis() {
   const [image, setImage] = useState(null);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleImageUpload = (e) => {
@@ -22,20 +22,20 @@ function MedicineAnalysis() {
     if (!image) return;
 
     setLoading(true);
-    setText('');
+    setText("");
 
     try {
       const worker = await createWorker();
-      await worker.loadLanguage('eng');
-      await worker.initialize('eng');
+      await worker.loadLanguage("eng");
+      await worker.initialize("eng");
       const {
         data: { text },
       } = await worker.recognize(image);
       setText(text);
       await worker.terminate();
     } catch (error) {
-      console.error('OCR Error:', error);
-      setText('Error processing image. Please try again.');
+      console.error("OCR Error:", error);
+      setText("Error processing image. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -89,7 +89,7 @@ function MedicineAnalysis() {
                     Processing...
                   </>
                 ) : (
-                  'Extract Text'
+                  "Extract Text"
                 )}
               </button>
             </div>
