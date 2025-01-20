@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
-function App() {
+function Prescription() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [textResult, setTextResult] = useState('');
   const [loading, setLoading] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const [progress, setProgress] = useState('');
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
@@ -16,6 +17,7 @@ function App() {
       }
       setSelectedImage(file);
       setTextResult('');
+      setProgress('');
     }
   };
 
@@ -42,6 +44,7 @@ function App() {
       }
       setSelectedImage(file);
       setTextResult('');
+      setProgress('');
     }
   };
 
@@ -53,19 +56,33 @@ function App() {
 
     try {
       setLoading(true);
+      setProgress('Initializing OCR...');
+      
       const worker = await createWorker();
+
+      setProgress('Loading language data...');
       await worker.loadLanguage('eng');
+      
+      setProgress('Initializing API...');
       await worker.initialize('eng');
       
+      setProgress('Processing image...');
       const { data: { text } } = await worker.recognize(selectedImage);
+      
+      if (!text.trim()) {
+        throw new Error('No text was detected in the image. Please ensure the image contains clear, readable text.');
+      }
+      
       setTextResult(text);
+      setProgress('');
       
       await worker.terminate();
     } catch (error) {
       console.error('Error:', error);
-      alert('Error processing image');
+      alert(error.message || 'Error processing image. Please ensure the image is clear and contains readable text.');
     } finally {
       setLoading(false);
+      setProgress('');
     }
   };
 
@@ -127,6 +144,7 @@ function App() {
                   onClick={() => {
                     setSelectedImage(null);
                     setTextResult('');
+                    setProgress('');
                   }}
                   className="text-sm text-red-600 hover:text-red-800"
                 >
@@ -137,15 +155,23 @@ function App() {
           </div>
 
           {selectedImage && (
-            <button
-              onClick={handleExtractText}
-              disabled={loading}
-              className={`mt-6 w-full py-3 px-4 rounded-md text-white font-medium
-                ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}
-                transition-colors`}
-            >
-              {loading ? 'Processing...' : 'Extract Text'}
-            </button>
+            <>
+              <button
+                onClick={handleExtractText}
+                disabled={loading}
+                className={`mt-6 w-full py-3 px-4 rounded-md text-white font-medium
+                  ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}
+                  transition-colors`}
+              >
+                {loading ? 'Processing...' : 'Extract Text'}
+              </button>
+              
+              {progress && (
+                <div className="mt-4 text-sm text-gray-600 text-center">
+                  {progress}
+                </div>
+              )}
+            </>
           )}
 
           {textResult && (
@@ -164,4 +190,4 @@ function App() {
   );
 }
 
-export default App;
+export default Prescription;
