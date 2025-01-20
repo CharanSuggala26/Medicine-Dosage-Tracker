@@ -80,7 +80,7 @@ function Home() {
             whileTap={{ scale: 0.95 }}
             className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
-            <Link to="/prescription-analysis">
+            <Link to="/medicine-analysis">
               <FaFilePrescription className="text-blue-500 text-3xl mb-4" />
               <h2 className="text-2xl font-semibold mb-4">
                 Prescription Analysis

@@ -22,7 +22,7 @@ export default function Contact() {
           <p className="text-gray-600">
             123 Healthcare Ave<br />
             Medical District<br />
-            New York, NY 10001
+            Hyderabad ,500090
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export default function Contact() {
           <p className="text-gray-600">
             Mon-Fri from 8am to 5pm<br />
             <a href="tel:+1234567890" className="text-blue-600 hover:underline">
-              +1 (234) 567-890
+              +91 768346543
             </a>
           </p>
         </div>
@@ -46,8 +46,8 @@ export default function Contact() {
           <h3 className="font-semibold mb-2">Email Us</h3>
           <p className="text-gray-600">
             Send us an email<br />
-            <a href="mailto:support@healthcare.com" className="text-blue-600 hover:underline">
-              support@healthcare.com
+            <a href="mailto:pillplanner@healthcare.com" className="text-blue-600 hover:underline">
+              pillplanner@healthcare.com
             </a>
           </p>
         </div>
