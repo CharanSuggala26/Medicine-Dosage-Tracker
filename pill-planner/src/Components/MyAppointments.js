@@ -1,5 +1,5 @@
-import React from 'react';
-import { Calendar, Clock, X } from 'lucide-react';
+import React from "react";
+import { Calendar, Clock, X } from "lucide-react";
 
 export default function MyAppointments({ appointments, onClose }) {
   return (
@@ -11,11 +11,13 @@ export default function MyAppointments({ appointments, onClose }) {
         >
           <X className="w-6 h-6" />
         </button>
-        
+
         <h2 className="text-2xl font-semibold mb-6">My Appointments</h2>
-        
+
         {appointments.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No appointments booked yet.</p>
+          <p className="text-gray-500 text-center py-8">
+            No appointments booked yet.
+          </p>
         ) : (
           <div className="space-y-4">
             {appointments.map((appointment, index) => (
@@ -25,7 +27,9 @@ export default function MyAppointments({ appointments, onClose }) {
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-semibold text-lg">{appointment.doctorName}</h3>
+                    <h3 className="font-semibold text-lg">
+                      {appointment.doctorName}
+                    </h3>
                     <p className="text-gray-600">{appointment.specialty}</p>
                   </div>
                   <div className="text-sm text-gray-500">
@@ -41,7 +45,8 @@ export default function MyAppointments({ appointments, onClose }) {
                 </div>
                 <div className="mt-2 pt-2 border-t">
                   <p className="text-sm text-gray-600">
-                    <span className="font-medium">Reason for visit:</span> {appointment.symptoms}
+                    <span className="font-medium">Reason for visit:</span>{" "}
+                    {appointment.symptoms}
                   </p>
                 </div>
               </div>
@@ -52,12 +57,6 @@ export default function MyAppointments({ appointments, onClose }) {
     </div>
   );
 }
-
-
-
-
-
-
 
 // import React from 'react';
 // import { Calendar, Clock, X } from 'lucide-react';
@@ -78,9 +77,9 @@ export default function MyAppointments({ appointments, onClose }) {
 //         >
 //           <X className="w-6 h-6" />
 //         </button>
-        
+
 //         <h2 className="text-2xl font-semibold mb-6">My Appointments</h2>
-        
+
 //         {appointments.length === 0 ? (
 //           <p className="text-gray-500 text-center py-8">No appointments booked yet.</p>
 //         ) : (

@@ -25,12 +25,33 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-      console.log("Fetched", doctors);
     }
     fetchData();
     fetchData();
     fetchData();
-    console.log(doctors);
+  }, []);
+
+  async function fetchAppointments() {
+    await axios
+      .get("http://localhost:4700/appointments", {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          Curr_User_Name: `${window.localStorage.getItem("user")}`,
+        },
+      })
+      .then((res) => {
+        if (res) {
+          setAppointments(res.data.payload);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    fetchAppointments();
+    fetchAppointments();
   }, []);
 
   const filteredDoctors = useMemo(() => {
@@ -45,20 +66,34 @@ function App() {
     });
   }, [specialtyFilter, searchQuery, doctors]);
 
-  const handleAppointmentSubmit = (data) => {
+  const handleAppointmentSubmit = async (data) => {
     const doctor = doctors.find((d) => d.id === data.doctorId);
     const appointment = {
       ...data,
+      name: `${window.localStorage.getItem("user")}`,
       doctorName: doctor.name,
       specialty: doctor.specialty,
     };
 
-    console.log(appointment);
-
-    setAppointments((prev) => [...prev, appointment]);
-    setSelectedDoctorId(null);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
+    await axios
+      .post(
+        "http://localhost:4700/appointments/add",
+        { appointment },
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        fetchAppointments();
+        setSelectedDoctorId(null);
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
