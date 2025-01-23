@@ -10,6 +10,7 @@ import {
   Smartphone
 } from 'lucide-react';
 import CountUp from 'react-countup';
+import { Link } from 'react-router-dom';
 
 function LandingPage() {
   return (
@@ -31,9 +32,11 @@ function LandingPage() {
               Your health is our priority.
             </p>
             <div className="flex gap-4">
+              <Link to='/home'>
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                Get Started Free
+                Get Started
               </button>
+              </Link>
               <button className="border border-gray-300 hover:border-blue-600 px-8 py-3 rounded-lg font-semibold transition flex items-center gap-2">
                 Watch Demo <ChevronRight size={20} />
               </button>

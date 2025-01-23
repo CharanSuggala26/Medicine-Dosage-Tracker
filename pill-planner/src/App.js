@@ -34,7 +34,7 @@ function App() {
         
         <main className="flex-grow pt-16">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/store" element={<Store />} />
@@ -46,7 +46,7 @@ function App() {
             <Route path="/doctor" element={<AdminDoctor />} />
             <Route path="/medicines" element={<AdminMedicines />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/stats" element={<Stats />} />
             <Route path="/medicine-analysis" element={<MedicineAnalysis />} />
           </Routes>
