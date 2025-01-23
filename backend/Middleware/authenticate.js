@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
       }
     });
   } else {
-    res.sendStatus(401);
+    return res.send({ status: 401, message: "Please login!" });
   }
 };
 
