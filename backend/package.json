@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "corss": "^2.8.5",
