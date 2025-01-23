@@ -6,6 +6,7 @@ const storeApp = require("./APIs/StoreData.js");
 const userApp = require("./APIs/usersApp.js");
 const appointmentsApp = require("./APIs/appointmentsApp.js");
 const modelApp = require("./APIs/modelRequest.js");
+const medicineApp = require("./APIs/medicineApp.js");
 const client = require("mongodb").MongoClient;
 const app = exp();
 const port = process.env.PORT || 3500;
@@ -39,6 +40,7 @@ app.use("/store", storeApp);
 app.use("/users", userApp);
 app.use("/appointments", appointmentsApp);
 app.use("/model", modelApp);
+app.use("/medicines", medicineApp);
 
 app.listen(port, () => {
   console.log(`Server running on ${port}.`);
