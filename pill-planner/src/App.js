@@ -18,6 +18,7 @@ import Profile from "./Pages/Profile";
 import LandingPage from "./Pages/LandingPage";
 import Stats from "./Pages/Stats";
 import MedicineAnalysis from "./Pages/MedicineAnalysis";
+import WorkoutTrainer from "./Pages/WorkoutTrainer";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -49,6 +50,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/stats" element={<Stats />} />
             <Route path="/medicine-analysis" element={<MedicineAnalysis />} />
+            <Route path="/workout" element={<WorkoutTrainer />} />
           </Routes>
         </main>
         <Footer />
