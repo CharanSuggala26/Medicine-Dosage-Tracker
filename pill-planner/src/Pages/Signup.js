@@ -1,24 +1,39 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 
 const Signup = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
 
-  const handleSubmit = (e) => {
+  let nav = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log('Signup:', { name, email, password });
+    let res = await axios.post("http://localhost:4700/users/register/", {
+      name,
+      password,
+      phone,
+      email,
+      age,
+      gender,
+    });
+
+    if (res.data.status === 409) {
+      alert(res.data.message);
+    } else {
+      alert("Successfully Registered!");
+      nav("/login");
+    }
   };
 
   const handleGoogleSignup = () => {
-    // Handle Google signup logic here
-    console.log('Google signup clicked');
+    console.log("Google signup clicked");
   };
 
   return (
@@ -38,11 +53,16 @@ const Signup = () => {
 
       {/* Signup Form */}
       <div className="relative bg-white p-8 rounded-lg shadow-md w-96 z-10">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">Create Account</h2>
-        
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
+          Create Account
+        </h2>
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Full Name
             </label>
             <input
@@ -56,7 +76,10 @@ const Signup = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -70,21 +93,27 @@ const Signup = () => {
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone
             </label>
-           <input
-                id="phone"
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                required
-                />
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -98,36 +127,42 @@ const Signup = () => {
           </div>
 
           <div>
-              <label htmlFor="age" className="block text-sm font-medium text-gray-700">
-                Age
-              </label>
-              <input
-                id="age"
-                type="number"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                required
-              />
+            <label
+              htmlFor="age"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Age
+            </label>
+            <input
+              id="age"
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
           </div>
 
           <div>
-              <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-                  Gender
-              </label>
-              <select
-            id="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            required
+            <label
+              htmlFor="gender"
+              className="block text-sm font-medium text-gray-700"
             >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>          
+              Gender
+            </label>
+            <select
+              id="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
           <div>
             <button
@@ -145,7 +180,9 @@ const Signup = () => {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-to-color">Or continue with</span>
+              <span className="px-2 bg-white text-gray-to-color">
+                Or continue with
+              </span>
             </div>
           </div>
 
@@ -159,8 +196,11 @@ const Signup = () => {
         </div>
 
         <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Sign in
           </Link>
         </p>
@@ -170,5 +210,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-

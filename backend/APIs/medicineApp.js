@@ -36,7 +36,39 @@ const addNewMedicine = expAsyncHandler(async (req, res) => {
   return res.send({ status: 501, message: "Internal Server Error." });
 });
 
+const updateTaken = expAsyncHandler(async (req, res) => {
+  const usersCollection = req.app.get("usersCollection");
+  const username = req.body.name;
+  const medID = req.body.id;
+
+  let user = await usersCollection.findOne({ name: username });
+  let medData = user.medicineData;
+  for (let i = 0; i < medData.length; i++) {
+    if (medData[i].id === medID) {
+      medData[i].taken = !medData[i].taken;
+      break;
+    }
+  }
+
+  console.log(medData);
+
+  let update = await usersCollection.updateOne(
+    { name: username },
+    { $set: { medicineData: medData } }
+  );
+
+  if (update.modifiedCount === 1) {
+    return res.send({
+      status: 200,
+      message: "Success!",
+    });
+  }
+
+  return res.send({ status: 501, message: "Internal Server Error." });
+});
+
 medicineApp.get("/", verifyToken, fetchMedicines);
 medicineApp.post("/add", verifyToken, addNewMedicine);
+medicineApp.post("/update", verifyToken, updateTaken);
 
 module.exports = medicineApp;

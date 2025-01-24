@@ -47,6 +47,8 @@ function App() {
     const medicine = {
       ...newMed,
       uname: `${window.localStorage.getItem("user")}`,
+      id: Date.now(),
+      taken: false,
     };
 
     await axios
@@ -67,10 +69,27 @@ function App() {
       });
   };
 
-  const handleMarkTaken = (id) => {
+  const handleMarkTaken = async (id) => {
     setMedications((prev) =>
       prev.map((med) => (med.id === id ? { ...med, taken: !med.taken } : med))
     );
+
+    await axios
+      .post(
+        "http://localhost:4700/medicines/update",
+        { name: `${window.localStorage.getItem("user")}`, id },
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        fetchMedicines();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
