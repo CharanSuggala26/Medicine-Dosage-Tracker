@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
 import axios from "axios";
@@ -21,7 +19,7 @@ function App() {
       logger: (m) => console.log(m),
     }).then(async ({ data: { text } }) => {
       let result = await axios.post(
-        "http://localhost:4700/model/",
+        "http://localhost:4700/model/prescription",
         { text },
         {
           headers: {
@@ -41,10 +39,10 @@ function App() {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
       <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-6">
         <h1 className="text-2xl font-semibold text-center text-gray-800 mb-4">
-        Prescription Analysis
+          Prescription Analysis
         </h1>
         <p className="text-center text-gray-600 mb-6">
-        Upload your prescription here to analyse it.
+          Upload your prescription here to analyse it.
         </p>
 
         <div className="border-dashed border-2 border-gray-300 rounded-lg p-6 text-center mb-6">
@@ -99,4 +97,3 @@ function App() {
 }
 
 export default App;
-

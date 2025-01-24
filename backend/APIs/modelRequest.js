@@ -38,6 +38,39 @@ const fetchInfo = expAsyncHandler(async (req, res) => {
   return res.send({ status: 200, payload: responseText });
 });
 
-modelApp.post("/", verifyToken, fetchInfo);
+const fetchChat = expAsyncHandler(async (req, res) => {
+  const textInput = req.body.userInput;
+  const api_key = process.env.GEMINI_KEY;
+
+  const genAI = new GoogleGenerativeAI(api_key);
+
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+  });
+
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 64,
+    maxOutputTokens: 8192,
+    responseMimeType: "text/plain",
+  };
+
+  const chatSession = model.startChat({
+    generationConfig,
+    history: [],
+  });
+
+  const result = await chatSession.sendMessage(
+    `You are a conversational chatbot. Answer my question as if you are a certified gym trainer and a health expert. Directly respond with the answer, no other text. Make it plain text without any bold or italics, format it so that it can directly be displayed on a webpage with a maximum of 10 sentences and keep it short if there is not much scope. Be professional and don't be unnecessarily verbose. My question is: ${textInput}`
+  );
+
+  const responseText = result.response.text();
+
+  return res.send({ status: 200, payload: responseText });
+});
+
+modelApp.post("/prescription", verifyToken, fetchInfo);
+modelApp.post("/chat", verifyToken, fetchChat);
 
 module.exports = modelApp;

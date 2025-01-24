@@ -1,18 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import React, { useState, useRef } from "react";
+import axios from "axios";
 
 function WorkoutTrainer() {
   const [messages, setMessages] = useState([]);
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
   const inputRef = useRef(null);
-
-  const apiKey = process.env.GEMINI_KEY; // Ensure this is defined in your environment
-
-  useEffect(() => {
-    if (!apiKey) {
-      console.error('Gemini API key is missing. Please set it in your environment variables.');
-    }
-  }, [apiKey]);
 
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
@@ -25,27 +17,30 @@ function WorkoutTrainer() {
       return;
     }
 
-    const updatedMessages = [...messages, { role: 'user', content: userInput }];
+    const updatedMessages = [...messages, { role: "user", content: userInput }];
     setMessages(updatedMessages);
-    setUserInput('');
+    setUserInput("");
 
     try {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-
-      const prompt = updatedMessages
-        .map((message) => `${message.role}: ${message.content}`)
-        .join('\n') + '\nAssistant:';
-
-      const result = await model.generateMessage({ prompt });
-      const assistantResponse = result.response.text;
-
-      setMessages([...updatedMessages, { role: 'assistant', content: assistantResponse }]);
-    } catch (error) {
-      console.error('Error generating response:', error);
+      let result = await axios.post(
+        "http://localhost:4700/model/chat",
+        { userInput },
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const assistantResponse = result.data.payload;
       setMessages([
         ...updatedMessages,
-        { role: 'assistant', content: 'Error: Could not generate response.' },
+        { role: "assistant", content: assistantResponse },
+      ]);
+    } catch (error) {
+      console.error("Error generating response:", error);
+      setMessages([
+        ...updatedMessages,
+        { role: "assistant", content: "Error: Could not generate response." },
       ]);
     }
 
@@ -82,9 +77,9 @@ function WorkoutTrainer() {
             <li
               key={index}
               className={`p-2 rounded-md ${
-                message.role === 'user'
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'bg-gray-100 text-gray-700'
+                message.role === "user"
+                  ? "bg-blue-100 text-blue-700"
+                  : "bg-gray-100 text-gray-700"
               }`}
             >
               <strong>{message.role}:</strong> {message.content}
