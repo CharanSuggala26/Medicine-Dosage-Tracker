@@ -5,6 +5,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@heroicons/react": "^2.2.0",
+    "@shadcn/ui": "^0.0.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",

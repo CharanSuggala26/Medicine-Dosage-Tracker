@@ -54,3 +54,21 @@ Content-Type: application/json
   "symptoms": "Fever",
   "time": "11:00"
 }
+
+
+### Update medicine
+PUT http://localhost:4700/store/6772d683c0b2ab184650a225
+Content-Type: application/json
+
+{
+    "name": "Pulse Oximeter",
+    "description": "Measures blood oxygen levels",
+    "price": 225.99,
+    "image": "https://images.unsplash.com/photo-1587552562758-c09f4736d671?auto=format&fit=crop&q=80&w=400",
+    "category": "Devices"
+}
+
+
+### Delete Medicine
+DELETE http://localhost:4700/store/6772d683c0b2ab184650a225
+Content-Type: application/json
