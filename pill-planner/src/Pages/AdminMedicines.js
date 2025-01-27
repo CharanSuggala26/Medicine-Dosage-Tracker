@@ -1,91 +1,68 @@
-import React, { useState,useEffect } from 'react';
-import axios from 'axios';
-
-// const initialMedicinesData = [
-//   {
-//     _id: "6772d663c0b2ab184650a212",
-//     id: 1,
-//     name: "Paracetamol 500mg",
-//     description: "Pain reliever and fever reducer",
-//     price: 5.99,
-//     image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=400",
-//     category: "Pain Relief"
-//   },
-//   {
-//     _id: "6772d663c0b2ab184650a213",
-//     id: 2,
-//     name: "Vitamin C 1000mg",
-//     description: "Immune system support",
-//     price: 12.99,
-//     image: "https://www.oaklifevitamins.com/cdn/shop/files/CALGOVITVIT-C_2048x.jpg?v=1684760696",
-//     category: "Vitamins"
-//   },
-//   {
-//     _id: "6772d663c0b2ab184650a214",
-//     id: 3,
-//     name: "First Aid Kit",
-//     description: "Complete emergency kit",
-//     price: 24.99,
-//     image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&q=80&w=400",
-//     category: "First Aid"
-//   },
-//   // Add more medicines as needed
-// ];
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const AdminMedicines = () => {
   const [medicines, setMedicines] = useState([]);
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    image: '',
-    category: '',
+    name: "",
+    description: "",
+    price: "",
+    image: "",
+    category: "",
   });
   const [editingId, setEditingId] = useState(null);
 
+  async function fetchData() {
+    try {
+      const res = await axios.get("http://localhost:4700/store/");
+      setMedicines(res.data.payload);
+    } catch (err) {
+      console.error("Error fetching medicines:", err);
+    }
+  }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await axios.get("http://localhost:4700/store/");
-        setMedicines(res.data.payload);
-      } catch (err) {
-        console.error("Error fetching doctors:", err);
-      }
-    }
+    fetchData();
     fetchData();
   }, []);
 
-  const handleAdd = async() => {
+  const handleAdd = async () => {
     const newMedicine = {
       _id: Date.now().toString(),
       id: (medicines.length + 1).toString(),
       ...formData,
       price: parseFloat(formData.price),
     };
-    try{
-        const res = await axios.post("http://localhost:4700/store/add",newMedicine)
-        setMedicines([...medicines, res.data]);
-        setFormData({ name: '', description: '', price: '', image: '', category: '' });
-    }
-    catch (err) {
+    try {
+      const res = await axios.post(
+        "http://localhost:4700/store/add",
+        newMedicine
+      );
+      setMedicines([...medicines, res.data]);
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        image: "",
+        category: "",
+      });
+    } catch (err) {
       console.error("Error adding Medicine:", err);
     }
-
   };
 
-  const handleDelete = async(id) => {
+  const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:4700/store/${id}`);
       if (response.status === 200) {
-        setMedicines(medicines.filter((medicine) => medicine._id !== id));
+        fetchData();
+        fetchData();
       } else {
         console.error("Failed to delete medicine:", response.data.message);
       }
-     }catch (err) {
+    } catch (err) {
       console.error("Error deleting Medicine:", err);
     }
-    
   };
 
   const handleEdit = (id) => {
@@ -100,19 +77,18 @@ const AdminMedicines = () => {
     setEditingId(id);
   };
 
-
   // const handleUpdate = async () => {
   //   const updatedMedicine = {
   //     ...formData,
   //     price: parseFloat(formData.price),
   //   };
-  
+
   //   try {
   //       await axios.put(`http://localhost:4700/store/${editingId}`, updatedMedicine);
   //       const updatedMedicines = medicines.map((medicine) =>
   //       medicine._id === editingId ? { ...medicine, ...updatedMedicine } : medicine
   //     );
-  
+
   //     setMedicines(updatedMedicines);
   //     setEditingId(null);
   //     setFormData({ name: '', description: '', price: '', image: '', category: '' });
@@ -125,34 +101,51 @@ const AdminMedicines = () => {
       ...formData,
       price: parseFloat(formData.price),
     };
-  
-    try {
-        await axios.put(`http://localhost:4700/store/${editingId}`, updatedMedicine, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
 
-        const updatedMedicines = medicines.map((medicine) =>
-            medicine._id === editingId ? { ...medicine, ...updatedMedicine } : medicine
-        );
-  
-        setMedicines(updatedMedicines);
-        setEditingId(null);
-        setFormData({ name: '', description: '', price: '', image: '', category: '' });
+    try {
+      await axios.put(
+        `http://localhost:4700/store/${editingId}`,
+        updatedMedicine,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const updatedMedicines = medicines.map((medicine) =>
+        medicine._id === editingId
+          ? { ...medicine, ...updatedMedicine }
+          : medicine
+      );
+
+      setMedicines(updatedMedicines);
+      setEditingId(null);
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        image: "",
+        category: "",
+      });
     } catch (err) {
-        console.error('Error updating medicine:', err.response?.data || err.message);
+      console.error(
+        "Error updating medicine:",
+        err.response?.data || err.message
+      );
     }
-};
+  };
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Admin Portal - Medicines</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Admin Portal - Medicines
+      </h1>
 
       {/* Form Section */}
       <div className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">
-          {editingId ? 'Edit Medicine' : 'Add Medicine'}
+          {editingId ? "Edit Medicine" : "Add Medicine"}
         </h2>
         <form
           onSubmit={(e) => {
@@ -173,7 +166,9 @@ const AdminMedicines = () => {
             type="text"
             placeholder="Description"
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
             className="p-2 border rounded"
             required
           />
@@ -181,7 +176,9 @@ const AdminMedicines = () => {
             type="number"
             placeholder="Price"
             value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, price: e.target.value })
+            }
             className="p-2 border rounded"
             required
           />
@@ -189,7 +186,9 @@ const AdminMedicines = () => {
             type="text"
             placeholder="Image URL"
             value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, image: e.target.value })
+            }
             className="p-2 border rounded"
             required
           />
@@ -197,7 +196,9 @@ const AdminMedicines = () => {
             type="text"
             placeholder="Category"
             value={formData.category}
-            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
             className="p-2 border rounded"
             required
           />
@@ -205,7 +206,7 @@ const AdminMedicines = () => {
             type="submit"
             className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
-            {editingId ? 'Update' : 'Add'}
+            {editingId ? "Update" : "Add"}
           </button>
         </form>
       </div>
@@ -227,7 +228,11 @@ const AdminMedicines = () => {
             {medicines.map((medicine) => (
               <tr key={medicine._id} className="border-t">
                 <td className="py-2 px-4">
-                  <img src={medicine.image} alt={medicine.name} className="w-12 h-12 rounded" />
+                  <img
+                    src={medicine.image}
+                    alt={medicine.name}
+                    className="w-12 h-12 rounded"
+                  />
                 </td>
                 <td className="py-2 px-4">{medicine.name}</td>
                 <td className="py-2 px-4">{medicine.description}</td>

@@ -30,12 +30,8 @@ Content-Type: application/json
 
 ### GET Appointments
 GET http://localhost:4700/appointments/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGJiNTdjNWU5NWY5Y2QxM2YxMWQ1NiIsIm5hbWUiOiJUZXN0IiwiaWF0IjoxNzM3MjExNzE2fQ.OKh1judfQ0AR0g3CWTM3FS2ndfnP2dttX2dTSE1liXE
-Content-Type: application/json
-
-{
-    "name": "Test"
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTNkMjQyZTE3MWMxZWVkZTJmMWJkOSIsIm5hbWUiOiJUZXN0VXNlciIsImlhdCI6MTczNzk5MzMwMH0.T6SCtEmBeEYxzgHNYh1oLiDMTTEnMBLTlFDMCGDjbw4
+Curr_User_Name: TestUser
 
 
 ### POST Appointment addition
