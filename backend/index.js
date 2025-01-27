@@ -1,40 +1,45 @@
 require("dotenv").config();
-const exp = require("express");
+const express = require("express");
 const cors = require("cors");
+const { MongoClient } = require("mongodb");
+
+// Import routers
 const doctorsApp = require("./APIs/DoctorsData.js");
 const storeApp = require("./APIs/StoreData.js");
 const userApp = require("./APIs/usersApp.js");
 const appointmentsApp = require("./APIs/appointmentsApp.js");
 const modelApp = require("./APIs/modelRequest.js");
 const medicineApp = require("./APIs/medicineApp.js");
-const client = require("mongodb").MongoClient;
-const app = exp();
-const port = process.env.PORT || 3500;
-app.use(cors());
-app.use(exp.json());
 
+const app = express();
+const port = process.env.PORT || 3500;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// MongoDB connection
+const client = new MongoClient(process.env.DB_URI);
 client
-  .connect(process.env.DB_URI)
-  .then((client) => {
-    const dbObj = client.db("medicineDB");
-    const doctorsCollection = dbObj.collection("doctors");
-    app.set("doctorsCollection", doctorsCollection);
-    const medicinesCollection = dbObj.collection("medicines");
-    app.set("medicinesCollection", medicinesCollection);
-    const usersCollection = dbObj.collection("users");
-    app.set("usersCollection", usersCollection);
-    const appointmentsCollection = dbObj.collection("appointments");
-    app.set("appointmentsCollection", appointmentsCollection);
+  .connect()
+  .then(() => {
+    const db = client.db("medicineDB");
+    app.set("doctorsCollection", db.collection("doctors"));
+    app.set("medicinesCollection", db.collection("medicines"));
+    app.set("usersCollection", db.collection("users"));
+    app.set("appointmentsCollection", db.collection("appointments"));
     console.log("DB Connected Successfully.");
   })
   .catch((error) => {
-    console.log(error);
+    console.error("Error connecting to DB:", error);
   });
 
+// Test route
 app.get("/", (req, res) => {
-  res.send({ message: "Test for CORS." });
+  res.send({ message: "Server is running." });
 });
 
+// Routes
 app.use("/doctors", doctorsApp);
 app.use("/store", storeApp);
 app.use("/users", userApp);
@@ -42,6 +47,7 @@ app.use("/appointments", appointmentsApp);
 app.use("/model", modelApp);
 app.use("/medicines", medicineApp);
 
+// Start the server
 app.listen(port, () => {
-  console.log(`Server running on ${port}.`);
+  console.log(`Server running on http://localhost:${port}`);
 });
