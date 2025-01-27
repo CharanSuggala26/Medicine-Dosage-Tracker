@@ -1,19 +1,38 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Trash2, Plus, Minus } from 'lucide-react';
+import axios from 'axios';
 
 export function Cart({ onCheckout }) {
   const { state, dispatch } = useCart();
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = async (id, quantity) => {
     if (quantity < 1) return;
-    dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
+    try {
+      const response = await axios.put(`http://localhost:4700/store/${id}`, { quantity });
+
+      if (response.status === 200) {
+        dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
+      } else {
+        console.error('Failed to update quantity:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
   };
 
-  const removeItem = (id) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+  const removeItem = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:4700/cart/${id}`);
+      if (response.status === 200) {
+        dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+      } else {
+        console.error('Failed to remove item:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error removing item:', error);
+    }
   };
-
   if (state.items.length === 0) {
     return (
       <div className="text-center py-8">
@@ -21,6 +40,7 @@ export function Cart({ onCheckout }) {
       </div>
     );
   }
+  
 
   return (
     <div className="space-y-4">
