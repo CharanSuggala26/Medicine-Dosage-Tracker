@@ -19,8 +19,6 @@ const Login = () => {
       password: passw,
     });
 
-    console.log(response);
-
     const username = response.data.dbUsername;
     const token = response.data.token;
 
@@ -37,7 +35,6 @@ const Login = () => {
 
   return (
     <div className="min-h-screen relative flex items-center justify-center">
-      {/* Video Background */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src="https://videos.pexels.com/video-files/4260415/4260415-sd_640_360_25fps.mp4" // Replace with your video URL

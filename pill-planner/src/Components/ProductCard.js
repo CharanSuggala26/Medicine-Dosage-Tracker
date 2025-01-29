@@ -1,12 +1,12 @@
-import React from 'react';
-import { useCart } from '../context/CartContext';
-import { ShoppingCart, CreditCard } from 'lucide-react';
+import React, { useEffect } from "react";
+import { useCart } from "../context/CartContext";
+import { ShoppingCart, CreditCard } from "lucide-react";
 
 export function ProductCard({ product, onCheckout }) {
   const { dispatch } = useCart();
 
   const handleAddToCart = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
   return (
@@ -19,7 +19,9 @@ export function ProductCard({ product, onCheckout }) {
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
         <p className="text-gray-600 mt-1">{product.description}</p>
-        <div className="mt-2 text-xl font-bold text-green-600">${product.price.toFixed(2)}</div>
+        <div className="mt-2 text-xl font-bold text-green-600">
+          ${product.price.toFixed(2)}
+        </div>
         <div className="mt-4 flex gap-2">
           <button
             onClick={handleAddToCart}
@@ -28,7 +30,7 @@ export function ProductCard({ product, onCheckout }) {
             <ShoppingCart size={20} />
             Add to Cart
           </button>
-          <button 
+          <button
             onClick={() => {
               handleAddToCart();
               onCheckout();

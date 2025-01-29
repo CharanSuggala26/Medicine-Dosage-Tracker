@@ -21,7 +21,11 @@ function App() {
       })
       .then((res) => {
         if (res) {
-          setMedications(res.data.payload);
+          if (res.data.payload) {
+            setMedications(res.data.payload);
+          } else {
+            setMedications([]);
+          }
         }
       })
       .catch((err) => {

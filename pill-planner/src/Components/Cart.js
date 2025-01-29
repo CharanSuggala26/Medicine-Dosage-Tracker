@@ -1,38 +1,19 @@
-import React from 'react';
-import { useCart } from '../context/CartContext';
-import { Trash2, Plus, Minus } from 'lucide-react';
-import axios from 'axios';
+import React from "react";
+import { useCart } from "../context/CartContext";
+import { Trash2, Plus, Minus } from "lucide-react";
 
 export function Cart({ onCheckout }) {
   const { state, dispatch } = useCart();
 
   const updateQuantity = async (id, quantity) => {
     if (quantity < 1) return;
-    try {
-      const response = await axios.put(`http://localhost:4700/store/${id}`, { quantity });
-
-      if (response.status === 200) {
-        dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
-      } else {
-        console.error('Failed to update quantity:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error updating quantity:', error);
-    }
+    dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
   };
 
   const removeItem = async (id) => {
-    try {
-      const response = await axios.delete(`http://localhost:4700/cart/${id}`);
-      if (response.status === 200) {
-        dispatch({ type: 'REMOVE_FROM_CART', payload: id });
-      } else {
-        console.error('Failed to remove item:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error removing item:', error);
-    }
+    dispatch({ type: "REMOVE_FROM_CART", payload: id });
   };
+
   if (state.items.length === 0) {
     return (
       <div className="text-center py-8">
@@ -40,13 +21,19 @@ export function Cart({ onCheckout }) {
       </div>
     );
   }
-  
 
   return (
     <div className="space-y-4">
       {state.items.map((item) => (
-        <div key={item.id} className="flex items-center gap-4 bg-white p-4 rounded-lg shadow">
-          <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
+        <div
+          key={item.id}
+          className="flex items-center gap-4 bg-white p-4 rounded-lg shadow"
+        >
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-20 h-20 object-cover rounded"
+          />
           <div className="flex-1">
             <h3 className="font-semibold">{item.name}</h3>
             <p className="text-gray-600">${item.price.toFixed(2)}</p>
@@ -82,7 +69,7 @@ export function Cart({ onCheckout }) {
           <span className="font-semibold">Total:</span>
           <span className="font-bold text-xl">${state.total.toFixed(2)}</span>
         </div>
-        <button 
+        <button
           onClick={onCheckout}
           className="w-full mt-4 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition-colors"
         >
