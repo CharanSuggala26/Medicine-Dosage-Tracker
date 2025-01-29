@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Pencil, Trash2, Plus, Save } from 'lucide-react';
 
 const AdminMedicines = () => {
   const [medicines, setMedicines] = useState([]);
@@ -34,10 +35,7 @@ const AdminMedicines = () => {
       price: parseFloat(formData.price),
     };
     try {
-      const res = await axios.post(
-        "http://localhost:4700/store/add",
-        newMedicine
-      );
+      const res = await axios.post("http://localhost:4700/store/add", newMedicine);
       setMedicines([...medicines, res.data]);
       setFormData({
         name: "",
@@ -77,25 +75,6 @@ const AdminMedicines = () => {
     setEditingId(id);
   };
 
-  // const handleUpdate = async () => {
-  //   const updatedMedicine = {
-  //     ...formData,
-  //     price: parseFloat(formData.price),
-  //   };
-
-  //   try {
-  //       await axios.put(`http://localhost:4700/store/${editingId}`, updatedMedicine);
-  //       const updatedMedicines = medicines.map((medicine) =>
-  //       medicine._id === editingId ? { ...medicine, ...updatedMedicine } : medicine
-  //     );
-
-  //     setMedicines(updatedMedicines);
-  //     setEditingId(null);
-  //     setFormData({ name: '', description: '', price: '', image: '', category: '' });
-  //   } catch (err) {
-  //     console.error('Error updating medicine:', err.response?.data || err.message);
-  //   }
-  // };
   const handleUpdate = async () => {
     const updatedMedicine = {
       ...formData,
@@ -103,20 +82,14 @@ const AdminMedicines = () => {
     };
 
     try {
-      await axios.put(
-        `http://localhost:4700/store/${editingId}`,
-        updatedMedicine,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await axios.put(`http://localhost:4700/store/${editingId}`, updatedMedicine, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const updatedMedicines = medicines.map((medicine) =>
-        medicine._id === editingId
-          ? { ...medicine, ...updatedMedicine }
-          : medicine
+        medicine._id === editingId ? { ...medicine, ...updatedMedicine } : medicine
       );
 
       setMedicines(updatedMedicines);
@@ -129,133 +102,159 @@ const AdminMedicines = () => {
         category: "",
       });
     } catch (err) {
-      console.error(
-        "Error updating medicine:",
-        err.response?.data || err.message
-      );
+      console.error("Error updating medicine:", err.response?.data || err.message);
     }
   };
 
+  const InputField = ({ placeholder, value, onChange, type = "text" }) => (
+    <input
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full transition-all duration-200 bg-white shadow-sm"
+      required
+    />
+  );
+
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Admin Portal - Medicines
-      </h1>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto rounded-2xl"> 
+      <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-2xl">
+        <h1 className="text-4xl font-bold text-white text-center mb-12">
+          Medicine Management Portal
+        </h1>
+        </div>
 
-      {/* Form Section */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-4">
-          {editingId ? "Edit Medicine" : "Add Medicine"}
-        </h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            editingId ? handleUpdate() : handleAdd();
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
-          <input
-            type="text"
-            placeholder="Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Description"
-            value={formData.description}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="number"
-            placeholder="Price"
-            value={formData.price}
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={formData.image}
-            onChange={(e) =>
-              setFormData({ ...formData, image: e.target.value })
-            }
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Category"
-            value={formData.category}
-            onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
-            }
-            className="p-2 border rounded"
-            required
-          />
-          <button
-            type="submit"
-            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        {/* Form Section */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+            {editingId ? (
+              <>
+                <Pencil className="w-6 h-6 mr-2 text-yellow-500" />
+                Edit Medicine
+              </>
+            ) : (
+              <>
+                <Plus className="w-6 h-6 mr-2 text-blue-500" />
+                Add New Medicine
+              </>
+            )}
+          </h2>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              editingId ? handleUpdate() : handleAdd();
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {editingId ? "Update" : "Add"}
-          </button>
-        </form>
-      </div>
+            <InputField
+              placeholder="Medicine Name"
+              value={formData.name}
+              onChange={(value) => setFormData({ ...formData, name: value })}
+            />
+            <InputField
+              placeholder="Description"
+              value={formData.description}
+              onChange={(value) => setFormData({ ...formData, description: value })}
+            />
+            <InputField
+              placeholder="Price"
+              value={formData.price}
+              onChange={(value) => setFormData({ ...formData, price: value })}
+              type="number"
+            />
+            <InputField
+              placeholder="Image URL"
+              value={formData.image}
+              onChange={(value) => setFormData({ ...formData, image: value })}
+            />
+            <InputField
+              placeholder="Category"
+              value={formData.category}
+              onChange={(value) => setFormData({ ...formData, category: value })}
+            />
+            <button
+              type="submit"
+              className="flex items-center justify-center p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
+            >
+              {editingId ? (
+                <>
+                  <Save className="w-5 h-5 mr-2" />
+                  Update Medicine
+                </>
+              ) : (
+                <>
+                  <Plus className="w-5 h-5 mr-2" />
+                  Add Medicine
+                </>
+              )}
+            </button>
+          </form>
+        </div>
 
-      {/* Data Table Section */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white shadow rounded">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="py-2 px-4">Image</th>
-              <th className="py-2 px-4">Name</th>
-              <th className="py-2 px-4">Description</th>
-              <th className="py-2 px-4">Price</th>
-              <th className="py-2 px-4">Category</th>
-              <th className="py-2 px-4">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {medicines.map((medicine) => (
-              <tr key={medicine._id} className="border-t">
-                <td className="py-2 px-4">
-                  <img
-                    src={medicine.image}
-                    alt={medicine.name}
-                    className="w-12 h-12 rounded"
-                  />
-                </td>
-                <td className="py-2 px-4">{medicine.name}</td>
-                <td className="py-2 px-4">{medicine.description}</td>
-                <td className="py-2 px-4">${medicine.price}</td>
-                <td className="py-2 px-4">{medicine.category}</td>
-                <td className="py-2 px-4 space-x-2">
-                  <button
-                    onClick={() => handleEdit(medicine._id)}
-                    className="px-4 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(medicine._id)}
-                    className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {/* Data Table Section */}
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  {["Image", "Name", "Description", "Price", "Category", "Actions"].map((header) => (
+                    <th
+                      key={header}
+                      className="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider"
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {medicines.map((medicine) => (
+                  <tr key={medicine._id} className="hover:bg-gray-50 transition-colors duration-150">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <img
+                        src={medicine.image}
+                        alt={medicine.name}
+                        className="w-16 h-16 rounded-lg object-cover shadow-sm"
+                      />
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                      {medicine.name}
+                    </td>
+                    <td className="px-6 py-4 text-gray-500 max-w-xs truncate">
+                      {medicine.description}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 font-medium">
+                      ${medicine.price.toFixed(2)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        {medicine.category}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap space-x-3">
+                      <button
+                        onClick={() => handleEdit(medicine._id)}
+                        className="inline-flex items-center px-3 py-2 border border-yellow-500 text-yellow-500 rounded-md hover:bg-yellow-500 hover:text-white transition-colors duration-200"
+                      >
+                        <Pencil className="w-4 h-4 mr-1" />
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(medicine._id)}
+                        className="inline-flex items-center px-3 py-2 border border-red-500 text-red-500 rounded-md hover:bg-red-500 hover:text-white transition-colors duration-200"
+                      >
+                        <Trash2 className="w-4 h-4 mr-1" />
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
