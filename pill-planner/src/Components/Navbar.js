@@ -22,7 +22,7 @@ function Navbar({ toggleSidebar }) {
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("cart");
     navigate("/login");
-    setIsMenuOpen(false); // Close menu on logout
+    setIsMenuOpen(false); // Closing the menu on logout
   };
 
   // Close menu if clicking outside
@@ -40,7 +40,7 @@ function Navbar({ toggleSidebar }) {
     <nav className="bg-gray-800 fixed w-full z-10 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left Side */}
+         
           <div className="flex items-center">
             <button
               onClick={toggleSidebar}
@@ -55,7 +55,7 @@ function Navbar({ toggleSidebar }) {
             </div>
           </div>
 
-          {/* Desktop Menu */}
+          
           <div className="hidden md:flex items-center">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
@@ -112,7 +112,7 @@ function Navbar({ toggleSidebar }) {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+ 
       <div
         ref={menuRef}
         className={`md:hidden fixed top-16 left-0 w-full bg-gray-900 text-white transition-transform duration-300 ease-in-out ${
