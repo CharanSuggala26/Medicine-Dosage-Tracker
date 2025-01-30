@@ -9,6 +9,7 @@ const userApp = require("./APIs/usersApp.js");
 const appointmentsApp = require("./APIs/appointmentsApp.js");
 const modelApp = require("./APIs/modelRequest.js");
 const medicineApp = require("./APIs/medicineApp.js");
+const razorApp = require("./APIs/RazorPay.js");
 
 const app = express();
 const port = process.env.PORT || 3500;
@@ -37,6 +38,7 @@ app.use("/users", userApp);
 app.use("/appointments", appointmentsApp);
 app.use("/model", modelApp);
 app.use("/medicines", medicineApp);
+app.use("/razorpay", razorApp);
 
 app.listen(port, () => {
   console.log(`Server running on Port: ${port}`);

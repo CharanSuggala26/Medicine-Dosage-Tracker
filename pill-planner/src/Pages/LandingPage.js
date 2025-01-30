@@ -2,6 +2,7 @@ import React from "react";
 import { Bell, Calendar, Shield, Pill, ChevronRight } from "lucide-react";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 function LandingPage() {
   return (
@@ -93,7 +94,7 @@ function LandingPage() {
       </section>
 
       {/* Stats Section */}
-
+      
       <section className="bg-blue-600 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -119,7 +120,6 @@ function LandingPage() {
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -138,23 +138,7 @@ function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer
-      <footer className="bg-gray-50 py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4 md:mb-0">
-              <Pill className="w-6 h-6 text-blue-600" />
-              MediTrack
-            </div>
-            <div className="flex gap-6 text-gray-600">
-              <a href="#" className="hover:text-blue-600">Privacy</a>
-              <a href="#" className="hover:text-blue-600">Terms</a>
-              <a href="#" className="hover:text-blue-600">Contact</a>
-            </div>
-          </div>
-        </div>
-      </footer> */}
+      <Footer/>
     </div>
   );
 }

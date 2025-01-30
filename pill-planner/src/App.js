@@ -53,7 +53,6 @@ function App() {
             <Route path="/workout" element={<WorkoutTrainer />} />
           </Routes>
         </main>
-        <Footer />
       </div>
     </Router>
   );
