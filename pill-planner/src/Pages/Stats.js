@@ -32,7 +32,6 @@ ChartJS.register(
 );
 
 function App() {
-  // Mock data
   const medicineData = {
     purchases: {
       labels: ["Aspirin", "Ibuprofen", "Paracetamol", "Vitamins"],
@@ -47,10 +46,10 @@ function App() {
       count: Math.floor(Math.random() * 5),
     })),
     stats: {
-      totalMedicines: 12,
-      currentStreak: 7,
+      totalMedicines: 6,
+      currentStreak: 2,
       compliance: "92%",
-      monthlySpend: "$124.50",
+      monthlySpend: "$24.33",
     },
   };
 
@@ -83,7 +82,6 @@ function App() {
           Medicine Statistics Dashboard
         </h1>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatsCard
             title="Total Medicines"
@@ -106,10 +104,7 @@ function App() {
             icon={<CurrencyDollarIcon className="h-6 w-6" />}
           />
         </div>
-
-        {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Medicine Distribution */}
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">
               Medicine Distribution
@@ -121,8 +116,6 @@ function App() {
               />
             </div>
           </div>
-
-          {/* Weekly Dosage Trend */}
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">Weekly Dosage Trend</h2>
             <div className="h-[300px]">
@@ -141,7 +134,6 @@ function App() {
             </div>
           </div>
 
-          {/* Dosage Heat Map */}
           <div className="bg-white p-6 rounded-lg shadow lg:col-span-2">
             <h2 className="text-xl font-semibold mb-4">
               Yearly Dosage Heat Map

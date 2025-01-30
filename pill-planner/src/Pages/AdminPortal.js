@@ -19,10 +19,10 @@ function AdminPortal() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl font-extrabold text-gray-900 mb-6">
-            Welcome to Pill-Planner
+            Welcome Admin!
           </h1>
           <p className="text-xl text-gray-700 mb-12">
-            Your health is in your hands. Let us help you keep it there.
+            You have the access to manage the data.
           </p>
         </motion.div>
 
