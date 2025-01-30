@@ -30,7 +30,7 @@ const fetchInfo = expAsyncHandler(async (req, res) => {
   });
 
   const result = await chatSession.sendMessage(
-    `I am giving you the data extract from a medical prescription. I want you to analyze the text and include the following things: the list of medicines given the in the prescription with dosage, along with when and how to take each medicine and any required precautions(Dos and Donts). Directly respond with the answer, no other text. Make it plain text without any bold or italics, format it so that it can directly be displayed on a webpage. The prescription text is: ${textInput}`
+    `You are an experienced MBBS doctor and you are expert in giving Medications and analzing prescriptions.I am giving you the data extract from a medical prescription. I want you to analyze the text and include the following things: the list of medicines given the in the prescription with dosage, along with when and how to take each medicine and any required precautions(Dos and Donts). Directly respond with the answer, no other text. Make it plain text without any bold or italics, format it so that it can directly be displayed on a webpage.If the information extracted is not complete then use your knowlege to give the response with the limited information you got from the input. The prescription text is: ${textInput}`
   );
 
   const responseText = result.response.text();
