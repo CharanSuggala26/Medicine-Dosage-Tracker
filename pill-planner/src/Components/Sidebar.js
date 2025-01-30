@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaCog, FaEnvelope, FaShoppingBasket, FaShoppingCart, FaCalendar, FaCashRegister, FaStarAndCrescent, FaStarHalfAlt, FaStopwatch } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaCalendar, FaCashRegister,  FaStopwatch,  } from 'react-icons/fa';
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 function Sidebar({ isOpen }) {
   return (
@@ -21,11 +22,11 @@ function Sidebar({ isOpen }) {
           </li>
           <li>
             <Link
-              to="/about"
+              to="/workout"
               className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-700"
             >
-              <FaInfoCircle className="h-5 w-5" />
-              <span>About</span>
+              <GiWeightLiftingUp className="h-5 w-5" />
+              <span>Workout</span>
             </Link>
           </li>
           <li>

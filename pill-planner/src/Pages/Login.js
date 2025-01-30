@@ -37,17 +37,15 @@ const Login = () => {
     <div className="min-h-screen relative flex items-center justify-center">
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src="https://videos.pexels.com/video-files/4260415/4260415-sd_640_360_25fps.mp4" // Replace with your video URL
+        src="https://videos.pexels.com/video-files/4260415/4260415-sd_640_360_25fps.mp4" 
         autoPlay
         loop
         muted
         playsInline
       ></video>
 
-      {/* Fallback Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-to-color opacity-80"></div>
 
-      {/* Login Form */}
       <div className="relative z-10 bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
           Login
