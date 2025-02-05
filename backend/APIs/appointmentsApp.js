@@ -53,7 +53,7 @@ const addNewAppointment = expAsyncHandler(async (req, res) => {
   const { name, email, phone, date, time, doctorName, specialty, symptoms } = newApt;
 
   const message = `
-    Subject: Appointment Confirmation – Dr. ${doctorName} (${specialty})
+    Subject: Appointment Confirmation – ${doctorName} (${specialty})
 
     Dear ${name},
 
@@ -61,13 +61,15 @@ const addNewAppointment = expAsyncHandler(async (req, res) => {
 
     📅 Date: ${new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
     ⏰ Time: ${time}
-    👨‍⚕️ Doctor: Dr. ${doctorName}
+    👨‍⚕️ Doctor: ${doctorName}
     🏥 Specialty: ${specialty}
     📝 Symptoms: ${symptoms}
 
     📞 Contact: ${phone}
 
     Looking forward to serving you!
+
+    PillPlanner © 2025. All rights reserved.
   `;
 
   try {
