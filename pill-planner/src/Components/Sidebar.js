@@ -1,12 +1,18 @@
-import { Link } from 'react-router-dom';
-import { FaHome, FaShoppingCart, FaCalendar, FaCashRegister,  FaStopwatch,  } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import {
+  FaHome,
+  FaShoppingCart,
+  FaCalendar,
+  FaCashRegister,
+  FaStopwatch,
+} from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
 
 function Sidebar({ isOpen }) {
   return (
     <div
       className={`fixed left-0 top-16 h-full w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
+        isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       <div className="p-4">
@@ -31,11 +37,11 @@ function Sidebar({ isOpen }) {
           </li>
           <li>
             <Link
-              to="/shceduling"
+              to="/scheduling"
               className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-700"
             >
               <FaCalendar className="h-5 w-5" />
-              <span>Shceduling</span>
+              <span>Scheduling</span>
             </Link>
           </li>
           <li>
@@ -64,7 +70,7 @@ function Sidebar({ isOpen }) {
               <FaStopwatch className="h-5 w-5" />
               <span>Stats dashboard</span>
             </Link>
-          </li>          
+          </li>
         </ul>
       </div>
     </div>

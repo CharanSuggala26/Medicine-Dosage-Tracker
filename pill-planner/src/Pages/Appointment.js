@@ -40,8 +40,10 @@ function App() {
         },
       })
       .then((res) => {
-        if (res) {
+        if (res.data.payload) {
           setAppointments(res.data.payload);
+        } else {
+          setAppointments([]);
         }
       })
       .catch((err) => {
