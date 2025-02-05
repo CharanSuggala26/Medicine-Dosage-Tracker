@@ -20,6 +20,11 @@ const founders = [
     role: "Medical Director & Co-founder",
     image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400",
     bio: "Dr. Rodriguez brings her extensive medical expertise to ensure all our products meet the highest medical standards."
+  },{
+    name: "Ms. D. Lohitha",
+    role: "Medical Director & Co-founder",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400",
+    bio: "Dr. Rodriguez brings her extensive medical expertise to ensure all our products meet the highest medical standards."
   }
 ];
 
@@ -46,7 +51,7 @@ export function Founder() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-4 gap-8">
           {founders.map((founder, index) => (
             <motion.div
               key={founder.name}

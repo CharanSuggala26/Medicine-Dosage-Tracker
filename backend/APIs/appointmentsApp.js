@@ -50,6 +50,25 @@ const addNewAppointment = expAsyncHandler(async (req, res) => {
 
   const recipient = process.env.RECIPIENT;
   const subject = "Appointment Booked!";
+  const { name, email, phone, date, time, doctorName, specialty, symptoms } = newApt;
+
+  const message = `
+    Subject: Appointment Confirmation – Dr. ${doctorName} (${specialty})
+
+    Dear ${name},
+
+    Your appointment has been successfully booked. Below are the details of your appointment:
+
+    📅 Date: ${new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    ⏰ Time: ${time}
+    👨‍⚕️ Doctor: Dr. ${doctorName}
+    🏥 Specialty: ${specialty}
+    📝 Symptoms: ${symptoms}
+
+    📞 Contact: ${phone}
+
+    Looking forward to serving you!
+  `;
 
   try {
     const transporter = nodemailer.createTransport({
@@ -64,7 +83,7 @@ const addNewAppointment = expAsyncHandler(async (req, res) => {
       from: process.env.EMAIL_USER,
       to: recipient,
       subject: subject,
-      text: JSON.stringify(newApt),
+      text: message,
     };
     await transporter.sendMail(mailOptions);
   } catch (error) {
