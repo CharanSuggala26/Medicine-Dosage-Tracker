@@ -13,19 +13,20 @@ A full-stack application designed to help users manage their daily medicine inta
 
 ## 🛠️ Tech Stack
 
-### Frontend (`pill-planner/`):
+### 🖼️ Frontend (`pill-planner/`):
 - React.js
-- Tailwind CSS 
+- Tailwind CSS
 
-### Backend (`backend/`):
+### 🛢️ Backend (`backend/`):
 - Node.js
 - Express.js
-- MongoDB 
+- MongoDB
 - RESTful APIs
 
- ### Others:
- -Tessaract-OCR
- -Gemini 1.5 flash LLM
+### 🧠 Others:
+- Tesseract-OCR
+- Gemini 1.5 Flash LLM
+
 
 
 
@@ -44,13 +45,13 @@ A full-stack application designed to help users manage their daily medicine inta
 git clone https://github.com/CharanSuggala26/Medicine-Dosage-Tracker.git
 cd Medicine-Dosage-Tracker
 ```
-2.Install backend dependencies:
+2. Install backend dependencies:
 ```bash
 cd backend
 npm install
 npm start
 ```
-3.Install frontend dependencies:
+3. Install frontend dependencies:
 ```bash
 cd ../pill-planner
 npm install
