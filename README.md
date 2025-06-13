@@ -49,13 +49,14 @@ cd Medicine-Dosage-Tracker
 ```bash
 cd backend
 npm install
-npm start
+node index.js
+
 ```
 3. Install frontend dependencies:
 ```bash
 cd ../pill-planner
 npm install
-npm start
+npm run dev
 ```
 
 ## 📧 Contact
