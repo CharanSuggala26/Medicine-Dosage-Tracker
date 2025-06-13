@@ -10,7 +10,6 @@ A full-stack application designed to help users manage their daily medicine inta
 - 📊 **History Tracking**: View past dosage and adherence logs (planned).
 - 🔐 **Secure Authentication** (optional).
 
----
 
 ## 🛠️ Tech Stack
 
@@ -23,7 +22,14 @@ A full-stack application designed to help users manage their daily medicine inta
 - MongoDB / Firebase (as applicable)
 - RESTful APIs
 
----
 
 ## 📂 Project Structure
+
+Medicine-Dosage-Tracker/
+├── backend/ # Node.js backend and APIs
+├── pill-planner/ # Frontend app for pill scheduling and UI
+├── .gitignore
+└── README.md
+
+
 
