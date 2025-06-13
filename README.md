@@ -28,13 +28,44 @@ A full-stack application designed to help users manage their daily medicine inta
  -Gemini 1.5 flash LLM
 
 
-## 📂 Project Structure
 
-Medicine-Dosage-Tracker/
--├── backend/ 
--├── pill-planner/
--├── .gitignore
--└── README.md
+## 🔧 Installation & Setup
+
+### Prerequisites
+
+- Node.js & npm installed
+- MongoDB Atlas / Compass
+
+### Steps
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/CharanSuggala26/Medicine-Dosage-Tracker.git
+cd Medicine-Dosage-Tracker
+```
+2.Install backend dependencies:
+```bash
+cd backend
+npm install
+npm start
+```
+3.Install frontend dependencies:
+```bash
+cd ../pill-planner
+npm install
+npm start
+```
+---
+## Contact:
+```bash
+Email: saicharanguptha26@gmail.com
+portfoilio: https://my-portfolio-lovat-six-79.vercel.app/
+Github: https://github.com/CharanSuggala26
+LinkedIn: https://www.linkedin.com/in/saicharansuggala/
+Instagram: https://www.instagram.com/suggala_charan
+```
+
 
 
 
