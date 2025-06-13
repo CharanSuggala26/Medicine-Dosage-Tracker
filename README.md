@@ -13,23 +13,30 @@ A full-stack application designed to help users manage their daily medicine inta
 
 ## 🛠️ Tech Stack
 
-### Frontend (in `pill-planner/`):
-- React.js (or relevant framework)
-- Tailwind CSS / Bootstrap (if applicable)
+### Frontend (`pill-planner/`):
+- React.js
+- Tailwind CSS 
 
-### Backend (in `backend/`):
-- Node.js / Express.js
-- MongoDB / Firebase (as applicable)
+### Backend (`backend/`):
+- Node.js
+- Express.js
+- MongoDB 
 - RESTful APIs
+
+ ### Others:
+ -Tessaract-OCR
+ -Gemini 1.5 flash LLM
 
 
 ## 📂 Project Structure
 
 Medicine-Dosage-Tracker/
-├── backend/ # Node.js backend and APIs
-├── pill-planner/ # Frontend app for pill scheduling and UI
-├── .gitignore
-└── README.md
+-├── backend/ 
+-├── pill-planner/
+-├── .gitignore
+-└── README.md
+
+
 
 
 
