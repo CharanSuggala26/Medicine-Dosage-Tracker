@@ -56,15 +56,16 @@ cd ../pill-planner
 npm install
 npm start
 ```
----
-## Contact:
-```bash
-Email: saicharanguptha26@gmail.com
-portfoilio: https://my-portfolio-lovat-six-79.vercel.app/
-Github: https://github.com/CharanSuggala26
-LinkedIn: https://www.linkedin.com/in/saicharansuggala/
-Instagram: https://www.instagram.com/suggala_charan
-```
+
+## 📧 Contact
+
+- 📬 **Email**: [saicharanguptha26@gmail.com](mailto:saicharanguptha26@gmail.com)  
+- 🌐 **Portfolio**: [my-portfolio-lovat-six-79.vercel.app](https://my-portfolio-lovat-six-79.vercel.app/)  
+- 💻 **GitHub**: [github.com/CharanSuggala26](https://github.com/CharanSuggala26)  
+- 🔗 **LinkedIn**: [linkedin.com/in/saicharansuggala](https://www.linkedin.com/in/saicharansuggala/)  
+- 📸 **Instagram**: [instagram.com/suggala_charan](https://www.instagram.com/suggala_charan)
+
+
 
 
 
