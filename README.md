@@ -4,11 +4,14 @@ A full-stack application designed to help users manage their daily medicine inta
 
 ## 🚀 Features
 
-- 📅 **Pill Planner**: Create and manage medication schedules.
-- ⏰ **Reminders**: Get notified when it’s time to take your medicine.
-- 🩺 **Doctors Data Integration**: API to fetch or manage doctors' info.
-- 📊 **History Tracking**: View past dosage and adherence logs (planned).
-- 🔐 **Secure Authentication** (optional).
+- 📅 **Pill Planner**: Create and manage personalized medication schedules.  
+- ⏰ **Smart Reminders**: Get notified when it’s time to take your medicine.  
+- 🩺 **Doctor Data Integration**: Use APIs to fetch and manage doctor information.  
+- 📝 **Prescription Analyzer**: Analyze uploaded prescriptions for easier tracking and planning.  
+- 📅 **Doctor Appointment Booking**: Book appointments and receive email notifications.  
+- 💊 **PILL-Store**: An integrated e-commerce platform to buy medicines with Razorpay payment gateway support.  
+- 📊 **History Tracking**: Track dosage history and adherence logs.  
+- 🔐 **Secure Authentication**: Ensure user data safety with robust authentication mechanisms.
 
 
 ## 🛠️ Tech Stack
