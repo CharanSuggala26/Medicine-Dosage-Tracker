@@ -3,6 +3,7 @@ const expAsyncHandler = require("express-async-handler");
 const verifyToken = require("../Middleware/authenticate");
 const medicineApp = exp.Router();
 
+// performing just the CURD Operations for handling medicinal data for the medicine store (i.e Pill-Store)
 const fetchMedicines = expAsyncHandler(async (req, res) => {
   const usersCollection = req.app.get("usersCollection");
   const username = req.headers.curr_user_name;

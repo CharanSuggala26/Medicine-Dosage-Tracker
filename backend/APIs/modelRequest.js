@@ -5,13 +5,12 @@ require("dotenv").config();
 const modelApp = exp.Router();
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const fetchInfo = expAsyncHandler(async (req, res) => {
+// For prescription analysis, I got the input text from the image
+// through tessarctjs OCR .
+const fetchInfo = expAsyncHandler(async (req, res) =>{
   const textInput = req.body.text;
   const api_key = process.env.GEMINI_KEY;
-
   const genAI = new GoogleGenerativeAI(api_key);
-
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
   });
@@ -28,15 +27,19 @@ const fetchInfo = expAsyncHandler(async (req, res) => {
     generationConfig,
     history: [],
   });
-
+  // prompt is combined with the input
+  // I'm sending the combined input to Gemini-Flash 1.5 LLM.
   const result = await chatSession.sendMessage(
     `You are an experienced MBBS doctor and you are expert in giving Medications and analzing prescriptions.I am giving you the data extract from a medical prescription. I want you to analyze the text and include the following things: the list of medicines given the in the prescription with dosage, along with when and how to take each medicine and any required precautions(Dos and Donts). Directly respond with the answer, no other text. Make it plain text without any bold or italics, format it so that it can directly be displayed on a webpage.If the information extracted is not complete then use your knowlege to give the response with the limited information you got from the input. The prescription text is: ${textInput}`
   );
 
   const responseText = result.response.text();
-
+  // I'll send the response back to the frontend.
   return res.send({ status: 200, payload: responseText });
 });
+
+// For Gym Trainer I got the input text from the user.
+// I'm sending the combined input to Gemini-Flash 1.5 LLM.
 
 const fetchChat = expAsyncHandler(async (req, res) => {
   const textInput = req.body.userInput;

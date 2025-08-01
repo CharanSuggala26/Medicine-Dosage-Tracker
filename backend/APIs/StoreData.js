@@ -11,7 +11,7 @@ const fetchMedicines = expAsyncHandler(async (req, res) => {
 
 storeApp.get("/", fetchMedicines);
 
-storeApp.post("/add", async (req, res) => {
+storeApp.post("/add",async (req,res) => {
   try {
     const medicinesCollection = req.app.get("medicinesCollection");
     const newMedicine = req.body;
