@@ -8,7 +8,10 @@ const verifyToken = (req, res, next) => {
   if (token) {
     jwt.verify(token, tkn, (err, decoded) => {
       if (err) {
-        return res.send({ status: 403, message: "Unauthorized Access!" });
+        return res.send({
+          status: 403,
+          message: `Unauthorized Access!`,
+        });
       } else {
         next();
       }

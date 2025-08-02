@@ -14,7 +14,10 @@ storeApp.get("/", fetchMedicines);
 storeApp.post("/add", async (req, res) => {
   try {
     const medicinesCollection = req.app.get("medicinesCollection");
-    const newMedicine = req.body;
+    const newMedicine = {
+      ...req.body,
+      _id: new ObjectId(),
+    };
     const result = await medicinesCollection.insertOne(newMedicine);
     res.status(201).send({
       status: 201,
