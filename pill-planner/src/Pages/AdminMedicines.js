@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Pencil, Trash2, Plus, Save } from 'lucide-react';
+import { Pencil, Trash2, Plus, Save } from "lucide-react";
+import { use } from "react";
 
 const AdminMedicines = () => {
   const [medicines, setMedicines] = useState([]);
@@ -24,19 +25,21 @@ const AdminMedicines = () => {
 
   useEffect(() => {
     fetchData();
-    fetchData();
   }, []);
 
   const handleAdd = async () => {
     const newMedicine = {
       _id: Date.now().toString(),
-      id: (medicines.length + 1).toString(),
       ...formData,
       price: parseFloat(formData.price),
     };
     try {
-      const res = await axios.post("http://localhost:4700/store/add", newMedicine);
-      setMedicines([...medicines, res.data]);
+      const res = await axios.post(
+        "http://localhost:4700/store/add",
+        newMedicine
+      );
+      // setMedicines([...medicines, res.data]);
+      fetchData();
       setFormData({
         name: "",
         description: "",
@@ -53,7 +56,6 @@ const AdminMedicines = () => {
     try {
       const response = await axios.delete(`http://localhost:4700/store/${id}`);
       if (response.status === 200) {
-        fetchData();
         fetchData();
       } else {
         console.error("Failed to delete medicine:", response.data.message);
@@ -82,17 +84,24 @@ const AdminMedicines = () => {
     };
 
     try {
-      await axios.put(`http://localhost:4700/store/${editingId}`, updatedMedicine, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const updatedMedicines = medicines.map((medicine) =>
-        medicine._id === editingId ? { ...medicine, ...updatedMedicine } : medicine
+      await axios.put(
+        `http://localhost:4700/store/${editingId}`,
+        updatedMedicine,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      setMedicines(updatedMedicines);
+      const updatedMedicines = medicines.map((medicine) =>
+        medicine._id === editingId
+          ? { ...medicine, ...updatedMedicine }
+          : medicine
+      );
+
+      // setMedicines(updatedMedicines);
+      fetchData();
       setEditingId(null);
       setFormData({
         name: "",
@@ -102,7 +111,10 @@ const AdminMedicines = () => {
         category: "",
       });
     } catch (err) {
-      console.error("Error updating medicine:", err.response?.data || err.message);
+      console.error(
+        "Error updating medicine:",
+        err.response?.data || err.message
+      );
     }
   };
 
@@ -119,11 +131,11 @@ const AdminMedicines = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto rounded-2xl"> 
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-2xl">
-        <h1 className="text-4xl font-bold text-white text-center mb-12">
-          Medicine Management Portal
-        </h1>
+      <div className="max-w-7xl mx-auto rounded-2xl">
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-2xl">
+          <h1 className="text-4xl font-bold text-white text-center mb-12">
+            Medicine Management Portal
+          </h1>
         </div>
 
         {/* Form Section */}
@@ -156,7 +168,9 @@ const AdminMedicines = () => {
             <InputField
               placeholder="Description"
               value={formData.description}
-              onChange={(value) => setFormData({ ...formData, description: value })}
+              onChange={(value) =>
+                setFormData({ ...formData, description: value })
+              }
             />
             <InputField
               placeholder="Price"
@@ -172,7 +186,9 @@ const AdminMedicines = () => {
             <InputField
               placeholder="Category"
               value={formData.category}
-              onChange={(value) => setFormData({ ...formData, category: value })}
+              onChange={(value) =>
+                setFormData({ ...formData, category: value })
+              }
             />
             <button
               type="submit"
@@ -199,7 +215,14 @@ const AdminMedicines = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  {["Image", "Name", "Description", "Price", "Category", "Actions"].map((header) => (
+                  {[
+                    "Image",
+                    "Name",
+                    "Description",
+                    "Price",
+                    "Category",
+                    "Actions",
+                  ].map((header) => (
                     <th
                       key={header}
                       className="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider"
@@ -211,7 +234,10 @@ const AdminMedicines = () => {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {medicines.map((medicine) => (
-                  <tr key={medicine._id} className="hover:bg-gray-50 transition-colors duration-150">
+                  <tr
+                    key={medicine._id}
+                    className="hover:bg-gray-50 transition-colors duration-150"
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <img
                         src={medicine.image}
